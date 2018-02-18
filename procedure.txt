@@ -1,0 +1,28 @@
+//mysql store procedure
+
+
+DELIMITER //,$$
+	CREATE PROCEDURE get_data()
+	BEGIN
+	 select * from  codebos;
+	END // $$
+DELIMITER ;
+
+DELIMETER $$
+CREATE PROCEDURE news_title (IN news_title varchar(50),IN news_description varchar(50))
+BEGIN
+    insert into student (name,news_title,news_description) values (in_news_title ,in_news_description);
+END $$
+DELIMETER;
+
+DELIMITER //
+CREATE PROCEDURE news_update(news_id INT, news_title VARCHAR(64), news_discription VARCHAR(64)) 
+BEGIN 
+UPDATE news_feed 
+SET news_title = site_Name_Entered, 
+news_description = address_Entered, 
+
+WHERE site_Id = site_Id_Parsed; 
+END // 
+
+DELIMETER;

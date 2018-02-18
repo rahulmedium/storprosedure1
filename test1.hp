@@ -1,0 +1,23 @@
+<?php
+$con=mysqli_connect("localhost","my_user","my_password","my_db");
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+// Set autocommit to off
+mysqli_autocommit($con,FALSE);
+
+// Insert some values 
+mysqli_query($con,"INSERT INTO Persons (FirstName,LastName,Age)
+VALUES ('Peter','Griffin',35)");
+mysqli_query($con,"INSERT INTO Persons (FirstName,LastName,Age) 
+VALUES ('Glenn','Quagmire',33)");
+
+// Commit transaction
+mysqli_commit($con);
+
+// Close connection
+mysqli_close($con);
+?>

@@ -1,0 +1,47 @@
+ <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> 
+        <script>
+      
+      $(document).ready(function() {
+    $("#form1").validate({
+        rules: {
+            phone: 
+          {
+		  number: true,
+          maxlength: 10,
+		  minlength:10
+          },
+        },
+        messages: {
+            phone: "Please enter your mobile number"
+        },
+        submitHandler: submitForm
+    })
+    function submitForm() {
+    $.ajax({
+    type: "POST",
+    url: "http://34.195.215.247/viva/api/ride_booking.php",
+    data: $("#form1").serialize(),
+    dataType: "json",
+    success: function(data){
+        
+      // window.location.href = "live-tracking.php";
+      if ($.trim(data.status) === "1") {
+          var id=data.trip_id;
+         
+        
+                window.location.href = "live-tracking.php?trip_id="+id;
+                                } else {
+                                    $("#res").html(data).css("color", "red");
+                                    $('#form1')[0].reset();
+
+                                }
+
+    },
+    error:function(){
+   alert('error');
+          }   
+   });
+    }
+    });
+        </script>

@@ -1,6 +1,19 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+ 
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src=" https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	  <script src="  https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+<style>
+    .no-sort::after { display: none!important; }
+
+.no-sort { pointer-events: none!important; cursor: default!important; }
+    </style>
 <!------ Include the above in your HEAD tag ---------->
 
 <?php
@@ -50,12 +63,13 @@ $stmt = $conn->prepare("SELECT *  FROM category");
 
                
 
-	<table class="table">
+	<table class="table" id="example">
     <thead>
       <tr>
         <th>#</th>
         <th>Name</th>
-        <th>Action</th>
+		<th class="no-sort">Action</th>
+        
       </tr>
     </thead>
     <tbody>
@@ -90,6 +104,7 @@ $stmt = $conn->prepare("SELECT *  FROM category");
   </div>
 </div>
 	<script>
+
 	$(function () {
                     $('.modal-body').on('submit', '#users<?php echo $value->id ;?>', function (e) {
                         //  alert('hii');
@@ -135,7 +150,14 @@ $stmt = $conn->prepare("SELECT *  FROM category");
    </div>
 </div>
 <script>
-   
+   	$(document).ready(function() {
+   $('#example').dataTable( {
+        "columnDefs": [ {
+          "targets": 'no-sort',
+          "orderable": false,
+    } ]
+} );
+} );
 	 function delte_cat(id) {
 		    if (confirm('Are you sure you want to delete this category?')) {
             
